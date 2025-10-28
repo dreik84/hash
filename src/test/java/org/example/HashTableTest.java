@@ -10,8 +10,9 @@ class HashTableTest {
     @Test
     void testInsertFindDeleteLogic() {
         HashTable hashTable = new HashTable(11);
-        DataItem item = new DataItem(15);
-        hashTable.insert(item);
+        int key = 15;
+        DataItem item = new DataItem(key);
+        hashTable.insert(key, item);
 
         DataItem expected = item;
         DataItem actual = hashTable.find(item.getKey());
@@ -29,7 +30,7 @@ class HashTableTest {
         int key = 15;
 
         int expected = 15 % 11;
-        int actual = hashTable.hashFunc(key);
+        int actual = hashTable.hashFunc1(key);
 
         assertEquals(expected, actual);
     }

@@ -1,4 +1,4 @@
-// Реализация хеш-таблицы с линейным пробированием
+// Реализация хеш-таблицы с линейным пробированием и двойным хешированием
 package org.example;
 
 public class HashTable {
@@ -23,23 +23,28 @@ public class HashTable {
         System.out.println();
     }
 
-    public int hashFunc(int key) {
+    public int hashFunc1(int key) {
         return key % arraySize;
     }
 
-    public void insert(DataItem item) {
-        int key = item.getKey();
-        int hashVal = hashFunc(key);
+    public int hashFunc2(int key) {
+        return 5 - key % 5;
+    }
+
+    public void insert(int key, DataItem item) {
+        int hashVal = hashFunc1(key);
+        int stepSize = hashFunc2(key);
 
         while (hashArray[hashVal] != null && hashArray[hashVal].getKey() != -1) {
-            ++hashVal;
+            hashVal += stepSize;
             hashVal %= arraySize;
         }
         hashArray[hashVal] = item;
     }
 
     public DataItem delete(int key) {
-        int hashVal = hashFunc(key);
+        int hashVal = hashFunc1(key);
+        int stepSize = hashFunc2(key);
 
         while (hashArray[hashVal] != null) {
             if (hashArray[hashVal].getKey() == key) {
@@ -47,7 +52,7 @@ public class HashTable {
                 hashArray[hashVal] = nonItem;
                 return temp;
             }
-            ++hashVal;
+            hashVal += stepSize;
             hashVal %= arraySize;
         }
 
@@ -55,12 +60,13 @@ public class HashTable {
     }
 
     public DataItem find(int key) {
-        int hashVal = hashFunc(key);
+        int hashVal = hashFunc1(key);
+        int stepSize = hashFunc2(key);
 
         while (hashArray[hashVal] != null) {
             if (hashArray[hashVal].getKey() == key) return hashArray[hashVal];
 
-            ++hashVal;
+            hashVal += stepSize;
             hashVal %= arraySize;
         }
 

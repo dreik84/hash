@@ -7,20 +7,19 @@ import java.io.InputStreamReader;
 public class HashTableApp {
     public static void main(String[] args) throws IOException {
         DataItem aDataItem;
-        int aKey, size, n, keysPerCell;
+        int aKey, size, n;
 
         System.out.print("Enter size of hash table: ");
         size = getInt();
         System.out.print("Enter initial number of items: ");
         n = getInt();
-        keysPerCell = 10;
 
         HashTable theHashTable = new HashTable(size);
 
         for (int i = 0; i < n; i++) {
-            aKey = (int) (Math.random() * keysPerCell * size);
+            aKey = (int) (Math.random() * 2 * size);
             aDataItem = new DataItem(aKey);
-            theHashTable.insert(aDataItem);
+            theHashTable.insert(aKey, aDataItem);
         }
 
         while (true) {
@@ -36,7 +35,7 @@ public class HashTableApp {
                     System.out.print("Enter key value to insert: ");
                     aKey = getInt();
                     aDataItem = new DataItem(aKey);
-                    theHashTable.insert(aDataItem);
+                    theHashTable.insert(aKey, aDataItem);
                     break;
                 case 'd':
                     System.out.print("Enter key value to delete: ");
