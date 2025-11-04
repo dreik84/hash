@@ -59,4 +59,8 @@ public class SortedList {
 
         System.out.println();
     }
+
+    public Link getFirst() {
+        return first;
+    }
 }
