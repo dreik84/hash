@@ -4,10 +4,12 @@ package org.example;
 public class HashChain {
     private SortedList[] hashArray;
     private int arraySize;
+    private int numOfElements;
 
     public HashChain(int size) {
         arraySize = size;
         hashArray = new SortedList[arraySize];
+        numOfElements = 0;
 
         for (int i = 0; i < arraySize; i++) {
             hashArray[i] = new SortedList();
@@ -26,19 +28,49 @@ public class HashChain {
     }
 
     public void insert(Link theLink) {
+        if (numOfElements >= arraySize) rehash();
+
         int key = theLink.getKey();
         int hashVal = hashFunc(key);
         hashArray[hashVal].insert(theLink);
+        numOfElements++;
     }
 
     public void delete(int key) {
         int hashVal = hashFunc(key);
         hashArray[hashVal].delete(key);
+        numOfElements--;
     }
 
     public Link find(int key) {
         int hashVal = hashFunc(key);
         Link theLink = hashArray[hashVal].find(key);
         return theLink;
+    }
+
+    public void rehash() {
+        SortedList[] oldHashArray = hashArray;
+        arraySize *= 2;
+        hashArray = new SortedList[arraySize];
+
+
+        for (int i = 0; i < hashArray.length; i++) {
+            hashArray[i] = new SortedList();
+        }
+
+        for (int j = 0; j < oldHashArray.length; j++) {
+            if (oldHashArray[j].getFirst() != null) {
+                Link cur = oldHashArray[j].getFirst();
+
+                while (cur != null) {
+                    insert(new Link(cur.getKey()));
+                    cur = cur.next;
+                }
+            }
+        }
+    }
+
+    public int getArraySize() {
+        return arraySize;
     }
 }

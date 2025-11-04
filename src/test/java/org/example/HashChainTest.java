@@ -33,4 +33,21 @@ class HashChainTest {
 
         assertNull(hashChain.find(key));
     }
+
+    @Test
+    void testRehash() {
+        HashChain hashChain = new HashChain(5);
+
+        hashChain.insert(new Link(1));
+        hashChain.insert(new Link(2));
+        hashChain.insert(new Link(3));
+        hashChain.insert(new Link(4));
+        hashChain.insert(new Link(5));
+
+        assertEquals(5, hashChain.getArraySize());
+
+        hashChain.insert(new Link(6));
+
+        assertEquals(10, hashChain.getArraySize());
+    }
 }
