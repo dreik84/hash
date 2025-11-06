@@ -2,9 +2,11 @@ package org.example;
 
 public class SortedList {
     private Link first;
+    private int numOfElements;
 
     public SortedList() {
         first = null;
+        numOfElements = 0;
     }
 
     public void insert(Link theLink) {
@@ -21,6 +23,8 @@ public class SortedList {
         else previous.next = theLink;
 
         theLink.next = current;
+
+        numOfElements++;
     }
 
     public void delete(int key) {
@@ -34,6 +38,8 @@ public class SortedList {
 
         if (previous == null) first = first.next;
         else previous.next = current.next;
+
+        numOfElements--;
     }
 
     public Link find(int key) {
@@ -62,5 +68,9 @@ public class SortedList {
 
     public Link getFirst() {
         return first;
+    }
+
+    public int getNumOfElements() {
+        return numOfElements;
     }
 }
