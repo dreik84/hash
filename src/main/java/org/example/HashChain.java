@@ -32,7 +32,7 @@ public class HashChain {
 
         int key = theLink.getKey();
         int hashVal = hashFunc(key);
-        hashArray[hashVal].insert(theLink);
+        hashArray[hashVal].insert(key);
         numOfElements++;
     }
 
@@ -42,10 +42,9 @@ public class HashChain {
         numOfElements--;
     }
 
-    public Link find(int key) {
+    public boolean find(int key) {
         int hashVal = hashFunc(key);
-        Link theLink = hashArray[hashVal].find(key);
-        return theLink;
+        return hashArray[hashVal].find(key);
     }
 
     public void rehash() {

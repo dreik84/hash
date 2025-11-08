@@ -2,28 +2,25 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SortedListTest {
-
-    private Link lin;
 
     @Test
     void testInsertFindDeleteLogic() {
         SortedList list = new SortedList();
         int key = 5;
-        Link link = new Link(5);
 
-        assertNull(list.find(key));
+        assertFalse(list.find(key));
 
-        list.insert(link);
+        list.insert(key);
 
-        assertEquals(key, list.find(key).getKey());
+        assertTrue(list.find(key));
 
         list.delete(key);
 
-        assertNull(list.find(key));
+        assertFalse(list.find(key));
     }
 
     @Test

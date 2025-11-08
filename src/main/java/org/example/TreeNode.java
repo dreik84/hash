@@ -1,6 +1,6 @@
 package org.example;
 
-public class TreeNode {
+public class TreeNode implements HashChainCollection {
     private int iData;
     public TreeNode left;
     public TreeNode right;
@@ -13,5 +13,20 @@ public class TreeNode {
         this.iData = iData;
         this.left = left;
         this.right = right;
+    }
+
+    @Override
+    public void insert(int key) {
+
+    }
+
+    @Override
+    public void delete(int key) {
+
+    }
+
+    @Override
+    public boolean find(int key) {
+        return false;
     }
 }

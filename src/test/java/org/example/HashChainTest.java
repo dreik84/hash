@@ -2,8 +2,7 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class HashChainTest {
 
@@ -26,12 +25,12 @@ class HashChainTest {
         Link link = new Link(key);
         hashChain.insert(link);
 
-        assertEquals(link, hashChain.find(key));
-        assertNull(hashChain.find(wrongKey));
+        assertTrue(hashChain.find(key));
+        assertFalse(hashChain.find(wrongKey));
 
         hashChain.delete(key);
 
-        assertNull(hashChain.find(key));
+        assertFalse(hashChain.find(key));
     }
 
     @Test

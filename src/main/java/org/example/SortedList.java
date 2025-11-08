@@ -1,6 +1,6 @@
 package org.example;
 
-public class SortedList {
+public class SortedList implements HashChainCollection {
     private Link first;
     private int numOfElements;
 
@@ -9,8 +9,8 @@ public class SortedList {
         numOfElements = 0;
     }
 
-    public void insert(Link theLink) {
-        int key = theLink.getKey();
+    public void insert(int key) {
+        Link theLink = new Link(key);
         Link previous = null;
         Link current = first;
 
@@ -42,15 +42,15 @@ public class SortedList {
         numOfElements--;
     }
 
-    public Link find(int key) {
+    public boolean find(int key) {
         Link current = first;
 
         while (current != null && current.getKey() <= key) {
-            if (current.getKey() == key) return current;
+            if (current.getKey() == key) return true;
             current = current.next;
         }
 
-        return null;
+        return false;
     }
 
     public void displayList() {

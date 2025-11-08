@@ -45,9 +45,9 @@ public class HashChainApp {
                 case 'f':
                     System.out.print("Enter key value to find: ");
                     aKey = getInt();
-                    aDataItem = theHashTable.find(aKey);
+                    boolean found = theHashTable.find(aKey);
 
-                    if (aDataItem != null) {
+                    if (found) {
                         System.out.println("Found " + aKey);
                     } else {
                         System.out.println("Could not find " + aKey);
